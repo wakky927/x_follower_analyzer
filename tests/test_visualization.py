@@ -28,22 +28,23 @@ class TestChartGenerator:
                 following_count=500,
                 tweets_count=100,
                 verified=i % 2 == 0,
-                location="San Francisco" if i < 3 else "New York"
+                location="San Francisco" if i < 3 else "New York",
             )
-            
+
             from datetime import datetime
+
             tweets = [
                 Tweet(
                     tweet_id=f"{i}_1",
                     user_id=str(i),
                     text=f"Sample tweet from user {i}",
                     created_at=datetime.now(),
-                    hashtags=["tech", "ai"] if i % 2 == 0 else ["crypto"]
+                    hashtags=["tech", "ai"] if i % 2 == 0 else ["crypto"],
                 )
             ]
-            
+
             analyses.append(FollowerAnalysis(profile=profile, recent_tweets=tweets))
-        
+
         return analyses
 
     def test_chart_generator_initialization(self):
@@ -104,18 +105,19 @@ class TestDashboardGenerator:
             following_count=500,
             tweets_count=100,
             verified=True,
-            location="Test City"
+            location="Test City",
         )
-        
+
         from datetime import datetime
+
         tweet = Tweet(
             tweet_id="1",
             user_id="1",
             text="Test tweet",
             created_at=datetime.now(),
-            hashtags=["test"]
+            hashtags=["test"],
         )
-        
+
         return [FollowerAnalysis(profile=profile, recent_tweets=[tweet])]
 
     def test_dashboard_generator_initialization(self):
@@ -126,14 +128,14 @@ class TestDashboardGenerator:
     def test_generate_dashboard(self, sample_analyses):
         """Test dashboard generation."""
         generator = DashboardGenerator()
-        
+
         with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as tmp:
             output_path = generator.generate_dashboard(
                 analyses=sample_analyses,
                 target_username="test_user",
-                output_path=tmp.name
+                output_path=tmp.name,
             )
-            
+
             assert Path(output_path).exists()
             content = Path(output_path).read_text()
             assert "X Follower Analysis Dashboard" in content
@@ -154,9 +156,9 @@ class TestDashboardExporter:
             followers_count=1000,
             following_count=500,
             tweets_count=100,
-            verified=True
+            verified=True,
         )
-        
+
         return [FollowerAnalysis(profile=profile)]
 
     def test_dashboard_exporter_initialization(self):
@@ -169,10 +171,10 @@ class TestDashboardExporter:
         """Test dashboard export functionality."""
         with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as tmp:
             exporter = DashboardExporter(tmp.name)
-            
+
             # Should not raise exception
             exporter.export(sample_analyses, target_username="test_user")
-            
+
             # Check file was created and has content
             assert Path(tmp.name).exists()
             content = Path(tmp.name).read_text()
@@ -182,6 +184,6 @@ class TestDashboardExporter:
         """Test export with empty analyses list."""
         with tempfile.NamedTemporaryFile(suffix=".html", delete=False) as tmp:
             exporter = DashboardExporter(tmp.name)
-            
+
             # Should handle empty list gracefully
             exporter.export([], target_username="test_user")

@@ -39,10 +39,10 @@ class ExporterFactory:
     @staticmethod
     def create_dashboard_exporter(output_file: str) -> DashboardExporter:
         """Create dashboard exporter specifically.
-        
+
         Args:
             output_file: Path to output HTML file
-            
+
         Returns:
             DashboardExporter instance
         """

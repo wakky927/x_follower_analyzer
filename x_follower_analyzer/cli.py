@@ -161,26 +161,36 @@ def main(
                 exporter = ExporterFactory.create_exporter(
                     config.output_format, config.output_file
                 )
-                
+
                 # Export with target username for dashboard
-                if hasattr(exporter, 'export') and hasattr(exporter.export, '__code__') and 'target_username' in exporter.export.__code__.co_varnames:
+                if (
+                    hasattr(exporter, "export")
+                    and hasattr(exporter.export, "__code__")
+                    and "target_username" in exporter.export.__code__.co_varnames
+                ):
                     exporter.export(analyses, target_username=config.target_username)
                 else:
                     exporter.export(analyses)
 
                 click.echo("\\n🎉 Analysis and export completed successfully!")
                 click.echo(f"📁 Output file: {config.output_file}")
-                
+
                 # Generate additional dashboard if requested
                 if generate_dashboard and config.output_format.value != "html":
                     click.echo("\\n📊 Generating additional HTML dashboard...")
                     dashboard_file = f"{config.target_username}_dashboard.html"
-                    dashboard_exporter = ExporterFactory.create_dashboard_exporter(dashboard_file)
-                    dashboard_exporter.export(analyses, target_username=config.target_username)
+                    dashboard_exporter = ExporterFactory.create_dashboard_exporter(
+                        dashboard_file
+                    )
+                    dashboard_exporter.export(
+                        analyses, target_username=config.target_username
+                    )
                     click.echo(f"📁 Dashboard file: {dashboard_file}")
-                
+
                 if config.output_format.value == "html":
-                    click.echo("\\n🌐 Open the HTML file in your web browser to view the interactive dashboard!")
+                    click.echo(
+                        "\\n🌐 Open the HTML file in your web browser to view the interactive dashboard!"
+                    )
             else:
                 click.echo("\\n❌ No follower data collected.")
 

@@ -14,7 +14,9 @@ class DashboardExporter:
         self.output_file = output_file
         self.dashboard_generator = DashboardGenerator()
 
-    def export(self, analyses: List[FollowerAnalysis], target_username: str = "unknown") -> None:
+    def export(
+        self, analyses: List[FollowerAnalysis], target_username: str = "unknown"
+    ) -> None:
         """Export analyses as HTML dashboard."""
         if not analyses:
             print("⚠️  No analysis data to export to dashboard")
@@ -29,11 +31,13 @@ class DashboardExporter:
             dashboard_path = self.dashboard_generator.generate_dashboard(
                 analyses=analyses,
                 target_username=target_username,
-                output_path=str(output_path)
+                output_path=str(output_path),
             )
 
             print(f"✅ Dashboard exported successfully to: {dashboard_path}")
-            print(f"📊 Generated interactive dashboard with {len(analyses)} follower profiles")
+            print(
+                f"📊 Generated interactive dashboard with {len(analyses)} follower profiles"
+            )
             print(f"🌐 Open {dashboard_path} in your web browser to view the analysis")
 
         except Exception as e:
