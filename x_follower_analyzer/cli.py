@@ -34,9 +34,9 @@ from .utils.config import (
 )
 @click.option(
     "--output-format",
-    type=click.Choice(["csv", "json"], case_sensitive=False),
+    type=click.Choice(["csv", "json", "html"], case_sensitive=False),
     default="csv",
-    help="Output format (default: csv)",
+    help="Output format: csv, json, or html (interactive dashboard)",
 )
 @click.option(
     "--output-file",
@@ -60,6 +60,11 @@ from .utils.config import (
     help="Path to configuration file (default: config/.env)",
 )
 @click.option(
+    "--generate-dashboard",
+    is_flag=True,
+    help="Generate additional HTML dashboard alongside primary output",
+)
+@click.option(
     "--dry-run",
     is_flag=True,
     help="Show configuration and exit without running analysis",
@@ -74,6 +79,7 @@ def main(
     no_retweets: bool,
     rate_limit_delay: float,
     config_file: str,
+    generate_dashboard: bool,
     dry_run: bool,
 ) -> None:
     """Analyze X (Twitter) followers' profiles, posts, and likes.
@@ -155,10 +161,26 @@ def main(
                 exporter = ExporterFactory.create_exporter(
                     config.output_format, config.output_file
                 )
-                exporter.export(analyses)
+                
+                # Export with target username for dashboard
+                if hasattr(exporter, 'export') and hasattr(exporter.export, '__code__') and 'target_username' in exporter.export.__code__.co_varnames:
+                    exporter.export(analyses, target_username=config.target_username)
+                else:
+                    exporter.export(analyses)
 
                 click.echo("\\n🎉 Analysis and export completed successfully!")
                 click.echo(f"📁 Output file: {config.output_file}")
+                
+                # Generate additional dashboard if requested
+                if generate_dashboard and config.output_format.value != "html":
+                    click.echo("\\n📊 Generating additional HTML dashboard...")
+                    dashboard_file = f"{config.target_username}_dashboard.html"
+                    dashboard_exporter = ExporterFactory.create_dashboard_exporter(dashboard_file)
+                    dashboard_exporter.export(analyses, target_username=config.target_username)
+                    click.echo(f"📁 Dashboard file: {dashboard_file}")
+                
+                if config.output_format.value == "html":
+                    click.echo("\\n🌐 Open the HTML file in your web browser to view the interactive dashboard!")
             else:
                 click.echo("\\n❌ No follower data collected.")
 
