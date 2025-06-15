@@ -89,38 +89,38 @@ We've created a comprehensive demo dashboard analyzing 100 sample followers of @
 - **Engagement range**: 0-200 likes average, with power-law distribution
 - **Follower diversity**: 10K-100K+ follower range showing broad appeal
 
-**📱 Dashboard Components:**
+**📊 Demo Results - Actual Generated Charts:**
 
-1. **Summary Statistics Panel**
-   - Total followers analyzed: 100
-   - Verification rate: 23%
-   - Average followers: 15,420
-   - Unique locations: 17
-   - Tweets analyzed: 1,247
-   - Unique hashtags: 156
+#### 1. Follower Distribution Analysis
+![Follower Distribution](data/demo_images/follower_distribution.png)
+*Histogram and box plot showing follower count distribution with statistical indicators*
 
-2. **Interactive Visualizations**
-   - Follower vs Following scatter plot (color-coded by engagement)
-   - Engagement correlation analysis (retweets vs likes)
-   - Geographic distribution bar chart
-   - Activity histogram by tweet frequency
+#### 2. Account Verification Status  
+![Verification Status](data/demo_images/verification_status.png)
+*Pie chart breakdown showing 23% verification rate among analyzed followers*
 
-3. **Static Analysis Charts**
-   - Follower count distribution with statistical indicators
-   - Verification status pie chart
-   - Location analysis (top 10 regions)
-   - Hashtag word cloud with frequency weighting
-   - Hourly activity timeline
-   - Engagement pattern analysis
+#### 3. Geographic Distribution
+![Location Analysis](data/demo_images/location_analysis.png)
+*Top 10 follower locations with San Francisco, New York, and Global leading*
 
-**🌟 Sample Dashboard Output:**
+#### 4. Engagement Analysis
+![Engagement Analysis](data/demo_images/engagement_analysis.png)
+*Multi-panel analysis showing follower vs activity correlation, retweet/like distributions*
 
-The generated dashboard (`demo_dashboard.html`) includes:
-- Responsive design that works on desktop and mobile
-- Color-coded visualizations with professional styling
-- Interactive hover tooltips with detailed information
-- Export-ready charts for presentations
-- Comprehensive analytics summary
+#### 5. Hashtag Word Cloud
+![Hashtag Word Cloud](data/demo_images/hashtag_wordcloud.png)
+*Visual representation of trending topics: #Tesla, #SpaceX, #AI, #Crypto dominating*
+
+#### 6. Activity Timeline
+![Activity Timeline](data/demo_images/activity_timeline.png)
+*Hourly tweet posting patterns revealing peak activity times at 6-8 PM UTC*
+
+**📱 Dashboard Summary:**
+- **Total followers analyzed**: 100 with diverse engagement patterns
+- **Verification rate**: 23% among analyzed accounts  
+- **Geographic spread**: 17 unique locations globally
+- **Content analysis**: 1,247 tweets analyzed across 156 unique hashtags
+- **Peak engagement**: Clear patterns showing optimal posting times
 
 **💡 Business Intelligence Insights:**
 - **Audience Segmentation**: Clear tech/finance/space enthusiast clusters
