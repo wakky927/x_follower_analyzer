@@ -1,0 +1,90 @@
+[project]
+name = "x-follower-analyzer"
+version = "0.1.0"
+description = "X (Twitter) follower analysis tool for profile, posts, and likes data collection"
+requires-python = ">=3.12"
+dependencies = [
+    "tweepy>=4.14.0",           # X API client
+    "python-dotenv>=1.0.0",     # Environment variables
+    "pandas>=2.0.0",            # Data manipulation
+    "requests>=2.31.0",         # HTTP requests
+    "aiohttp>=3.8.0",           # Async HTTP client
+    "pydantic>=2.0.0",          # Data validation
+    "click>=8.1.0",             # CLI framework
+    "tqdm>=4.65.0",             # Progress bars
+    "python-dateutil>=2.8.2",   # Date parsing
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "flake8-docstrings>=1.7.0",
+    "isort>=5.12.0",
+    "mypy>=1.5.0",
+    "pre-commit>=3.3.0",
+    "safety>=2.3.0",
+    "bandit>=1.7.5",
+    "types-requests>=2.31.0",
+    "types-python-dateutil>=2.8.19",
+]
+
+[project.scripts]
+x-follower-analyzer = "x_follower_analyzer.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.black]
+line-length = 88
+target-version = ['py312']
+
+[tool.flake8]
+max-line-length = 88
+ignore = ["E203", "W503"]
+exclude = [".git", "__pycache__", ".venv", "build", "dist"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+check_untyped_defs = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = ["tests"]
+markers = [
+    "slow: marks tests as slow",
+    "integration: marks tests as integration tests",
+]
+
+[tool.coverage.run]
+source = ["x_follower_analyzer"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+skips = ["B101"]  # Skip assert_used test
