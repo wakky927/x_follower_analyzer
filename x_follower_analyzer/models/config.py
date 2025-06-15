@@ -10,6 +10,7 @@ class OutputFormat(Enum):
 
     CSV = "csv"
     JSON = "json"
+    DASHBOARD = "html"
 
 
 @dataclass

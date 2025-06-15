@@ -13,6 +13,11 @@ dependencies = [
     "click>=8.1.0",             # CLI framework
     "tqdm>=4.65.0",             # Progress bars
     "python-dateutil>=2.8.2",   # Date parsing
+    "matplotlib>=3.7.0",        # Plotting and visualization
+    "seaborn>=0.12.0",          # Statistical visualization
+    "plotly>=5.15.0",           # Interactive plots
+    "wordcloud>=1.9.0",         # Word cloud generation
+    "Pillow>=10.0.0",           # Image processing
 ]
 
 [project.optional-dependencies]
