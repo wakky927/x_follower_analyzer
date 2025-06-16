@@ -179,6 +179,7 @@ config/.env
 *.json
 output/
 data/
+!data/demo_images/
 logs/
 
 # Security reports

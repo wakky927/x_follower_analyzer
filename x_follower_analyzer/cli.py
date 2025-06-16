@@ -189,7 +189,8 @@ def main(
 
                 if config.output_format.value == "html":
                     click.echo(
-                        "\\n🌐 Open the HTML file in your web browser to view the interactive dashboard!"
+                        "\\n🌐 Open the HTML file in your web browser to view "
+                        "the interactive dashboard!"
                     )
             else:
                 click.echo("\\n❌ No follower data collected.")

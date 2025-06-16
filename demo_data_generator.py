@@ -144,8 +144,9 @@ def generate_demo_data(count: int = 50) -> List[FollowerAnalysis]:
         profile = UserProfile(
             user_id=str(1000000 + i),
             username=f"{random.choice(usernames)}_{i}",
-            display_name=f"{random.choice(display_names)} {i+1}",
-            description=f"Passionate about technology and innovation. Following @elonmusk for insights.",
+            display_name=f"{random.choice(display_names)} {i + 1}",
+            description="Passionate about technology and innovation. "
+            "Following @elonmusk for insights.",
             followers_count=followers_count,
             following_count=random.randint(50, 2000),
             tweets_count=random.randint(100, 5000),
