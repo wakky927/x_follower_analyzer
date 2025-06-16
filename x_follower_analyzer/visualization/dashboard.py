@@ -1,11 +1,9 @@
 """HTML dashboard generator for follower analysis visualization."""
 
-import json
 from datetime import datetime
 from pathlib import Path
 from typing import List, Dict, Any
 import plotly.graph_objects as go
-import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.offline as pyo
 
@@ -101,7 +99,10 @@ class DashboardGenerator:
                     size=8,
                 ),
                 text=[
-                    f"@{d['username']}<br>Followers: {d['followers_count']}<br>Following: {d['following_count']}"
+                    (
+                        f"@{d['username']}<br>Followers: {d['followers_count']}"
+                        f"<br>Following: {d['following_count']}"
+                    )
                     for d in follower_data
                 ],
                 hovertemplate="%{text}<extra></extra>",
@@ -125,7 +126,10 @@ class DashboardGenerator:
                     size=10,
                 ),
                 text=[
-                    f"@{d['username']}<br>Avg RT: {d['avg_retweets']:.1f}<br>Avg Likes: {d['avg_likes']:.1f}"
+                    (
+                        f"@{d['username']}<br>Avg RT: {d['avg_retweets']:.1f}"
+                        f"<br>Avg Likes: {d['avg_likes']:.1f}"
+                    )
                     for d in follower_data
                 ],
                 hovertemplate="%{text}<extra></extra>",
@@ -245,7 +249,7 @@ class DashboardGenerator:
             background-color: #f5f5f5;
             color: #333;
         }}
-        
+
         .header {{
             text-align: center;
             background: linear-gradient(135deg, #1DA1F2, #14171A);
@@ -255,14 +259,14 @@ class DashboardGenerator:
             margin-bottom: 30px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }}
-        
+
         .stats-grid {{
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }}
-        
+
         .stat-card {{
             background: white;
             padding: 20px;
@@ -271,19 +275,19 @@ class DashboardGenerator:
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             border-left: 4px solid #1DA1F2;
         }}
-        
+
         .stat-number {{
             font-size: 2em;
             font-weight: bold;
             color: #1DA1F2;
         }}
-        
+
         .stat-label {{
             color: #657786;
             font-size: 0.9em;
             margin-top: 5px;
         }}
-        
+
         .chart-section {{
             background: white;
             margin-bottom: 30px;
@@ -291,36 +295,36 @@ class DashboardGenerator:
             overflow: hidden;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }}
-        
+
         .chart-header {{
             background: #f8f9fa;
             padding: 15px 20px;
             border-bottom: 1px solid #e1e8ed;
         }}
-        
+
         .chart-title {{
             font-size: 1.2em;
             font-weight: bold;
             margin: 0;
         }}
-        
+
         .chart-content {{
             padding: 20px;
             text-align: center;
         }}
-        
+
         .chart-image {{
             max-width: 100%;
             height: auto;
             border-radius: 4px;
         }}
-        
+
         .grid-2 {{
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
             gap: 30px;
         }}
-        
+
         .footer {{
             text-align: center;
             color: #657786;
@@ -328,12 +332,12 @@ class DashboardGenerator:
             padding: 20px;
             border-top: 1px solid #e1e8ed;
         }}
-        
+
         @media (max-width: 768px) {{
             .grid-2 {{
                 grid-template-columns: 1fr;
             }}
-            
+
             .stats-grid {{
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }}
@@ -389,7 +393,8 @@ class DashboardGenerator:
                 <h3 class="chart-title">👥 Follower Distribution</h3>
             </div>
             <div class="chart-content">
-                <img src="data:image/png;base64,{kwargs['follower_dist_chart']}" alt="Follower Distribution" class="chart-image">
+                <img src="data:image/png;base64,{kwargs['follower_dist_chart']}" \
+                     alt="Follower Distribution" class="chart-image">
             </div>
         </div>
 
@@ -398,7 +403,8 @@ class DashboardGenerator:
                 <h3 class="chart-title">✅ Verification Status</h3>
             </div>
             <div class="chart-content">
-                <img src="data:image/png;base64,{kwargs['verification_chart']}" alt="Verification Status" class="chart-image">
+                <img src="data:image/png;base64,{kwargs['verification_chart']}" \
+                     alt="Verification Status" class="chart-image">
             </div>
         </div>
     </div>
@@ -409,7 +415,8 @@ class DashboardGenerator:
                 <h3 class="chart-title">🌍 Geographic Distribution</h3>
             </div>
             <div class="chart-content">
-                <img src="data:image/png;base64,{kwargs['location_chart']}" alt="Location Analysis" class="chart-image">
+                <img src="data:image/png;base64,{kwargs['location_chart']}" \
+                     alt="Location Analysis" class="chart-image">
             </div>
         </div>
 
@@ -418,7 +425,8 @@ class DashboardGenerator:
                 <h3 class="chart-title">💬 Engagement Analysis</h3>
             </div>
             <div class="chart-content">
-                <img src="data:image/png;base64,{kwargs['engagement_chart']}" alt="Engagement Analysis" class="chart-image">
+                <img src="data:image/png;base64,{kwargs['engagement_chart']}" \
+                     alt="Engagement Analysis" class="chart-image">
             </div>
         </div>
     </div>
@@ -429,7 +437,8 @@ class DashboardGenerator:
                 <h3 class="chart-title">#️⃣ Popular Hashtags</h3>
             </div>
             <div class="chart-content">
-                <img src="data:image/png;base64,{kwargs['hashtag_cloud']}" alt="Hashtag Word Cloud" class="chart-image">
+                <img src="data:image/png;base64,{kwargs['hashtag_cloud']}" \
+                     alt="Hashtag Word Cloud" class="chart-image">
             </div>
         </div>
 
@@ -438,14 +447,17 @@ class DashboardGenerator:
                 <h3 class="chart-title">⏰ Activity Timeline</h3>
             </div>
             <div class="chart-content">
-                <img src="data:image/png;base64,{kwargs['activity_timeline']}" alt="Activity Timeline" class="chart-image">
+                <img src="data:image/png;base64,{kwargs['activity_timeline']}" \
+                     alt="Activity Timeline" class="chart-image">
             </div>
         </div>
     </div>
 
     <div class="footer">
-        <p>Generated by X Follower Analyzer | Analysis Date: {kwargs['stats']['analysis_date']}</p>
-        <p>This dashboard provides insights into follower demographics, engagement patterns, and content preferences.</p>
+        <p>Generated by X Follower Analyzer | \
+Analysis Date: {kwargs['stats']['analysis_date']}</p>
+        <p>This dashboard provides insights into follower demographics, \
+engagement patterns, and content preferences.</p>
     </div>
 </body>
 </html>

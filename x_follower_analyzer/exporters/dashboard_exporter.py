@@ -36,7 +36,8 @@ class DashboardExporter:
 
             print(f"✅ Dashboard exported successfully to: {dashboard_path}")
             print(
-                f"📊 Generated interactive dashboard with {len(analyses)} follower profiles"
+                f"📊 Generated interactive dashboard with "
+                f"{len(analyses)} follower profiles"
             )
             print(f"🌐 Open {dashboard_path} in your web browser to view the analysis")
 

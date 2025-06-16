@@ -7,7 +7,6 @@ A tool to analyze X (Twitter) followers' profiles, posts, and likes history.
 
 import argparse
 import sys
-from pathlib import Path
 
 from x_follower_analyzer.models.config import AnalysisConfig, OutputFormat
 
