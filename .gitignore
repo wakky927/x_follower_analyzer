@@ -178,8 +178,6 @@ config/.env
 *.csv
 *.json
 output/
-data/
-!data/demo_images/
 logs/
 
 # Security reports
