@@ -32,6 +32,7 @@ class FollowerAnalysisCharts:
         # 日本語フォント設定
         try:
             import japanize_matplotlib
+
             japanize_matplotlib.japanize()
         except ImportError:
             pass
@@ -55,6 +56,7 @@ class FollowerAnalysisCharts:
         # フォントキャッシュクリア
         try:
             import matplotlib.font_manager
+
             matplotlib.font_manager._rebuild()
         except Exception:
             pass

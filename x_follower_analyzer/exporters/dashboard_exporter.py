@@ -39,9 +39,7 @@ class DashboardExporter:
                 f"📊 Generated interactive dashboard with "
                 f"{len(analyses)} follower profiles"
             )
-            print(
-                f"🌐 Open {dashboard_path} in your web browser to view the analysis"
-            )
+            print(f"🌐 Open {dashboard_path} in your web browser to view the analysis")
 
         except Exception as e:
             print(f"❌ Error exporting dashboard: {e}")
