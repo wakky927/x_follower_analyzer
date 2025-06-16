@@ -59,7 +59,8 @@ class FollowerAnalysisCharts:
 
             matplotlib.font_manager._rebuild()
         except Exception:
-            pass
+            # Font cache rebuild may fail on some systems - ignore safely
+            pass  # nosec
 
     def create_profile_collection_analysis(
         self, analyses: List[FollowerAnalysis]
